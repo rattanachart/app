@@ -1,12 +1,22 @@
+import "@babel/polyfill"
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import Root from './Root.js';
+import Splash from'./Splash.js';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+function noop() { }
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+if (process.env.NODE_ENV !== 'development') {
+  console.log = noop;
+}
+
+const app = document.querySelector('#root');
+
+const render = async () => {
+  ReactDOM.render(
+    <Root><Splash/></Root>,
+    app
+  );
+};
+
+render();
